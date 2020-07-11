@@ -22,7 +22,7 @@ class CategoriesForm extends Model
 
 	public function getList(): array
 	{
-		$categories = Category::find()->andWhere(['>', 'depth', 0])->orderBy(['lft' => SORT_ASC])->all();
+		$categories = Category::find()->indexBy('id')->andWhere(['>', 'depth', 0])->orderBy(['lft' => SORT_ASC])->all();
 
 		return array_map(function(Category $category) {
 			return $category->getNestedTitle();
